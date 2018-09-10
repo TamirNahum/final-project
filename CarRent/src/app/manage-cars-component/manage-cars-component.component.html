@@ -1,0 +1,40 @@
+<div class="container">
+  <form class="form-horizontal" role="form" (ngSubmit)="onSubmit()">
+
+<img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+/>
+<h2 id="top">Manage Cars</h2> 
+
+<button type="button" routerLink="../Add-Car" class="button light-black  btn-block">Add Car</button>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Car Number</th>
+      <th>Kilometerage</th>
+      <th>Is Proper For Rent</th>
+      <th>Available At Branch</th>
+      <th>edit/delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let car of this.carList.carList">
+      <td>{{car.CarNumber}}</td>
+      <td> {{car.Kilometerage}}KM</td>
+      <td> {{car.IsProperForRent}}</td>
+      <td><strong> {{car.Branch.BranchName}}</strong></td>
+
+      <td>
+        <a (click)="onEdit(car.CarNumber)">edit</a>/
+       <a (click)="onDelete(car.CarId)">delete</a>
+      </td>
+    </tr>
+   
+  </tbody>
+</table>
+
+</form>
+<!-- /form -->
+</div>
+<!-- ./container -->

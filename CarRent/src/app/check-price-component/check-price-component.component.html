@@ -1,0 +1,47 @@
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="container">
+ 
+        <div class="container">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">{{this.carList.singleCar?.CarTypeModel.Manufacturer}} {{this.carList.singleCar?.CarTypeModel.Model}}</div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <p class="list-group-item">{{this.carList.singleCar?.CarNumber}}</p>
+                            <p class="list-group-item">{{this.carList.singleCar?.CarTypeModel.DailyCost}}</p>
+                            <p class="list-group-item">Third item</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="startDate" class="col-sm-3 control-label">rent start day</label>
+            <div class="col-sm-9">
+                <input type="date" [(ngModel)]="this.startDate" id="startDate" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="endDate" class="col-sm-3 control-label">rent end day</label>
+            <div class="col-sm-9">
+                <input [(ngModel)]="this.endDate" type="date" id="endDate" class="form-control">
+            </div>
+        </div>
+
+      
+
+
+        <div class="form-group">
+            <div id="buttons" class="row">
+                <button class="button light-black col-sm-4" (click)="checkDates()">Check Price</button>
+                <button *ngIf="this.myUserService.userList.singleUser.UserName" class="button light-black  col-sm-4" (click)="onSubmit()">Order</button>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                />
+            </div>
+        </div>
+
+</div>

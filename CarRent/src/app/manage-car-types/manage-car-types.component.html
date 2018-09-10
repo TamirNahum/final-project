@@ -1,0 +1,38 @@
+<div class="container">
+    <form class="form-horizontal" role="form" (ngSubmit)="onSubmit()">
+  
+  <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+  />
+  <h2 id="top">Manage Car Types</h2> 
+  
+  <button type="button" routerLink="../Add-Car-Type" class="button light-black  btn-block">Add Car Type</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Manufacturer</th>
+        <th>Model</th>
+        <th>DailyCost</th>
+        <th>DayOverdueCost</th>
+        <th>ManufacturYear</th>
+        <th>IsManual</th>
+        <th>edit/delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let carType of this.carTypeList.carTypeList">
+        <td>{{carType.Manufacturer}}</td>
+        <td> {{carType.Model}}</td>
+        <td> {{carType.DailyCost}}</td>
+        <td><strong> {{carType.DayOverdueCost}}</strong></td>
+        <td> {{carType.ManufacturYear}}</td>
+        <td> {{carType.IsManual}}</td>
+        <td>
+          <a (click)="onEdit(carType)">edit</a>/
+          <a (click)="onDelete(carType.CarTypeId)">delete</a>
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+  

@@ -1,0 +1,12 @@
+div.ridge {
+    border-style: ridge;
+    border-width: 1px 1px 1px 1px;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom:6px;
+    padding-left: 12px;
+}
+.img-responsive{
+    width:100px;
+  height:180px;
+  }

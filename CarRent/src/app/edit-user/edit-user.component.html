@@ -1,0 +1,142 @@
+<div class="container">
+  <form class="form-horizontal" [formGroup]="editUserForm" role="form" (ngSubmit)="onSubmit()">
+    <h2>edit user</h2>
+
+    <table class="table-responsive ">
+      <thead>
+        <tr>
+          <th></th>
+          <th>previous value</th>
+          <th>new value</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <th>Full name</th>
+          <td>{{this.localUser.userToEdit?.FullName}}</td>
+          <td>
+              <div class="form-group">
+              <div class="col-sm-8">
+                <input type="text" formControlName="fullName" (change)="ngOnChanges()" [(ngModel)]="this.userToEdit.FullName" required id="startDate"
+                  class="form-control">
+              </div>
+            </div></td>
+        </tr>
+
+        <tr>
+          <th>UserName</th>
+          <td>{{this.localUser.userToEdit?.UserName}}</td>
+          <td><div class="form-group">
+              <div class="col-sm-8">
+                  <input [(ngModel)]="this.userToEdit.UserName" (change)="ngOnChanges()" formControlName="userName" type="text" required id="endDate" class="form-control ">
+              </div>
+          </div></td>
+        </tr>
+
+        <tr>
+            <th>ID number</th>
+            <td>{{this.localUser.userToEdit?.IdNumber}}</td>
+            <td><div class="form-group">
+                <div class="col-sm-8">
+                    <input [(ngModel)]="this.userToEdit.IdNumber" (change)="ngOnChanges()" formControlName="idNumber" type="text" required id="returnDate" class="form-control ">
+                </div>
+            </div></td>
+          </tr>
+
+          <tr>
+            <th>birthDate</th>
+            <td>{{this.localUser.userToEdit?.BirthDate}}</td>
+            <td><div class="form-group">
+                <div class="col-sm-8">
+                    <input [(ngModel)]="this.userToEdit.BirthDate" (change)="ngOnChanges()" formControlName="birthDate" type="date" required id="returnDate" class="form-control ">
+                </div>
+            </div></td>
+          </tr>
+
+          <tr>
+            <th>Gender</th>
+            <td>{{this.localUser.userToEdit?.IsMale}}</td>
+            <td>  <div class="form-group">
+              <div class="col-sm-8">
+                  <div class="row">
+   
+                          <label class="radio-inline">
+                              <input type="radio"  id="male" value="true"name="isMale" [(ngModel)]="this.userToEdit.IsMale" formControlName="isMale" >Male
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" id="female" value="false" formControlName="isMale" [(ngModel)]="this.userToEdit.IsMale" name="isMale">Female
+                            </label>
+                     
+                  </div>
+              </div>
+          </div></td>
+          </tr>
+
+          <tr>
+            <th>email</th>
+            <td>{{this.localUser.userToEdit?.Email}}</td>
+            <td><div class="form-group">
+                <div class="col-sm-8">
+                    <input [(ngModel)]="this.userToEdit.Email" (change)="ngOnChanges()" formControlName="email" type="email" required id="returnDate" class="form-control ">
+                </div>
+            </div></td>
+          </tr>
+
+          <tr>
+            <th>password</th>
+            <td>{{this.localUser.userToEdit?.Password}}</td>
+            <td><div class="form-group">
+                <div class="col-sm-8">
+                    <input [(ngModel)]="this.userToEdit.Password" (change)="ngOnChanges()" formControlName="password" type="text" required id="returnDate" class="form-control ">
+                </div>
+            </div></td>
+          </tr>
+
+          <tr>
+            <th>User Role</th>
+            <td>{{this.localUser.userToEdit?.UserRole}}</td>
+            <td>  <div class="form-group">
+              <div class="col-sm-8">
+                  <div class="row">
+   
+                          <label class="radio-inline">
+                              <input type="radio"  id="user" value="3"name="userRole" [(ngModel)]="this.userToEdit.UserRole" formControlName="userRole" >user
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" id="worker" value="2" formControlName="userRole" [(ngModel)]="this.userToEdit.UserRole" name="userRole">worker
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" id="manager" value="1" formControlName="userRole" [(ngModel)]="this.userToEdit.UserRole" name="userRole">manager
+                            </label>
+                     
+                  </div>
+              </div>
+          </div></td>
+          </tr>
+          
+
+      </tbody>
+    </table>
+   
+
+
+
+  
+
+
+
+    <div class="form-group">
+      <div class="col-sm-6 col-sm-offset-3">
+
+      </div>
+    </div>
+    <button type="submit" [disabled]="loading"  class="button light-black  btn-block">Save Changes</button>
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+    />
+
+
+  </form>
+  <!-- /form -->
+</div>
+<!-- ./container -->

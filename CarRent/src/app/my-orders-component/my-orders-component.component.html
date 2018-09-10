@@ -1,0 +1,30 @@
+
+<table>
+  <thead>
+    <tr>
+      
+      <th>Description</th>
+      <th>Kilometerage</th>
+      <th>Rent start</th>
+      
+      <th>Branch</th>
+      <th>Price for a day</th>
+      <th>Total Price</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of this.localOrderList.orderList">
+        
+      <td>{{order.Car.CarType.Manufacturer}} {{order.Car.CarTypeModel.Model}},{{order.Car.CarTypeModel.ManufacturYear}}</td>
+      <td> {{order.Car.Kilometerage}} KM</td>
+      <td><strong> {{order.StartRentDate | date:'fullDate'}}</strong></td>
+      
+      <td> {{order.Car.Branch.BranchName}}</td>
+      <td> {{order.Car.CarTypeModel.DailyCost}}$</td>
+      <td *ngIf="order.ReturnDate"> {{order.TotalPrice}}$</td>
+      <td *ngIf="!order.ReturnDate"> the rent isnt over yet</td>
+    </tr>
+   
+  </tbody>
+</table>

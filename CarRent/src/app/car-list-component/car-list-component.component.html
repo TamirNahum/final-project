@@ -1,0 +1,93 @@
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="input-group">
+        <div class="input-group-btn search-panel">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span id="search_concept">{{filterDropDownName}}</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+              <li>
+                  <a (click)="replaceDropDownLabel('All Cars')">All Cars</a>
+                </li>
+            <li>
+              <a (click)="replaceDropDownLabel('Transmission')">Transmission</a>
+            </li>
+            <li>
+              <a (click)="replaceDropDownLabel('Manufectur Year')">Manufectur Year</a>
+            </li>
+            <li>
+              <a (click)="replaceDropDownLabel('Company')">Company</a>
+            </li>
+            <li>
+              <a (click)="replaceDropDownLabel('Model')">Model </a>
+            </li>
+            <li>
+              <a (click)="replaceDropDownLabel('Date Range')">Date Range</a>
+            </li>
+          </ul>
+        </div>
+        <input type="hidden" name="search_param" value="all" id="search_param">
+        <input *ngIf="this.filterDropDownName=='Company'"[(ngModel)]="this.manufacturer" type="text" class="form-control" name="x"
+          placeholder="enter search term...">
+          <input *ngIf="this.filterDropDownName=='Model'"[(ngModel)]="this.model" type="text" class="form-control" name="x"
+          placeholder="enter search term...">
+          
+        <input *ngIf="this.filterDropDownName=='Manufectur Year'" [(ngModel)]="this.manufacturYear" type="number" class="form-control" name="x" placeholder="enter year">
+
+        <div class="form-group ridge" *ngIf="this.filterDropDownName=='Transmission'">
+         
+            <div class="form-group">
+              <div class="col-sm-8">
+                <div class="row ">
+
+                  <label class="radio-inline">
+                    <input type="radio" id="isManual" [(ngModel)]="this.isManual" value="true" name="isManual">manual
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" id="isManual" value="false" [(ngModel)]="this.isManual" name="isManual">automatic
+                  </label>
+
+                </div>
+              </div>
+            </div>
+        
+        </div>
+
+
+        <span class="input-group-btn">
+          <button (click)="setCarList()"class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--        <img src= class="img-responsive" style="width:100%" alt="Image">
+-->
+<div class="container">
+  <div class="row"></div>
+  <div class="col-sm-4" *ngFor="let car of carList.carList">
+    <div class="panel panel-primary">
+      <div class="panel-heading">{{car.CarTypeModel.Manufacturer}} {{car.CarTypeModel.Model}}</div>
+      <div class="panel-body">
+        <img *ngIf="car.Image!=''" src="http://localhost:50181/{{car.Image}}" class="img-responsive" style="width:100%" alt="">
+        <img *ngIf="car.Image==''" src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="">
+
+      </div>
+      <div class="panel-body">
+      </div>
+      <div id="buttons">
+        <button class="button light-black" routerLink="../Check-Price" (click)="selectedCar(car.CarNumber)">more Details</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>

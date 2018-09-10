@@ -1,0 +1,126 @@
+<div class="container">
+  <form class="form-horizontal" [formGroup]="editCarForm" role="form" (ngSubmit)="onSubmit()">
+    <h2>edit car</h2>
+
+    <table class="table-responsive ">
+      <thead>
+        <tr>
+          <th></th>
+          <th>previous value</th>
+          <th>new value</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <th>car number</th>
+          <td>{{this.localCar.singleCar?.CarNumber}}</td>
+          <td>
+            <div class="form-group">
+              <div class="col-sm-8">
+                <input type="text" formControlName="carNumber" [(ngModel)]="this.carToEdit.CarNumber" id="carNumber" class="form-control">
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Kilometerage</th>
+          <td>{{this.localCar.singleCar?.Kilometerage}}</td>
+          <td>
+            <div class="form-group">
+              <div class="col-sm-8">
+                <input type="number" formControlName="kilometerage" name="kilometerage" [(ngModel)]="this.carToEdit.Kilometerage" id="kilometerage" class="form-control">
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <th>IsProperForRent</th>
+          <td>{{this.localCar.singleCar?.IsProperForRent}}</td>
+          <td>
+            <div class="form-group">
+              <div class="col-sm-8">
+                <div class="row">
+
+                  <label class="radio-inline">
+                    <input type="radio"  name="isProperForRent" id="isProperForRent" value="true"  [(ngModel)]="this.carToEdit.IsProperForRent" formControlName="isProperForRent">proper for rent
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" id="isProperForRent" value="false" formControlName="isProperForRent" [(ngModel)]="this.carToEdit.IsProperForRent"
+                      name="isProperForRent">not proper for rent
+                  </label>
+
+                </div>
+              </div>
+            </div>
+           
+          </td>
+        </tr>
+
+        <tr>
+          <th>Car Type</th>
+          <td>{{this.localCar.singleCar?.CarTypeModel.ManufacturYear}} {{this.localCar.singleCar?.CarTypeModel.Manufacturer}}
+            {{this.localCar.singleCar?.CarTypeModel.Model}}
+          </td>
+          <td>
+            <div class="dropdown col-sm-9">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true">
+                {{selectedCarType?.ManufacturYear}} {{selectedCarType?.Manufacturer}} {{selectedCarType?.Model}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li *ngFor="let carType of this.myCarTypeService.carTypeInfo.carTypeList">
+                  <a (click)="setSelectedCarType(carType)">{{carType.ManufacturYear}} {{carType.Manufacturer}} {{carType.Model}}</a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Branch</th>
+          <td>{{this.localCar.singleCar?.Branch.BranchName}}</td>
+          <td>
+            <div class="dropdown col-sm-9">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true">
+                {{selectedBranch?.BranchName}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li *ngFor="let branch of this.myBranchService.branchList.branchList ">
+                  <a (click)="setSelectedBranch(branch)">{{branch.BranchName}}</a>
+                </li>
+              </ul>
+            </div>
+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+    <div class="form-group">
+      <div class="col-sm-6 col-sm-offset-3">
+        <span class="help-block">*Required fields</span>
+      </div>
+    </div>
+    <button type="submit" [disabled]="loading" class="button light-black  btn-block">Save Changes</button>
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+    />
+
+
+  </form>
+  <!-- /form -->
+</div>
+<!-- ./container -->

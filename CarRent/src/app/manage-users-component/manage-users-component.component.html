@@ -1,0 +1,52 @@
+<div class="container">
+  <form class="form-horizontal" role="form" (ngSubmit)="onSubmit()">
+
+<img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+/>
+<h2 id="top">Manage Users</h2> 
+
+<button type="button" routerLink="../Add-User" class="button light-black  btn-block">Add User</button>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>UserName</th>
+      <th>Full Name</th>
+      <th>ID number</th>
+      <th>IdNumber</th>
+      <th>Gender</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th>UserRole</th>
+      <th>BirthDate</th>
+      <th>edit/delete</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of this.userList.userList">
+      <td><img class="img"src="http://localhost:50181/{{user.Image}}"></td>
+      <td>{{user.UserName}}</td>
+      <td> {{user.FullName}}</td>
+      <td> {{user.IdNumber}}</td>
+      <td><strong> {{user.Email}}</strong></td>
+      
+      <td> {{user.IsMale}}</td>
+      <td> {{user.Email}}</td>
+      <td > {{user.Password}}</td>
+      <td >{{user.UserRole}}</td>
+      <td >{{user?.BirthDate | date:'fullDate'}}</td>
+      <td>
+        <a (click)="onEdit(user.UserId)">edit</a>/
+        <a (click)="onDelete(user.UserId)">delete</a>
+      </td>
+    </tr>
+   
+  </tbody>
+</table>
+
+</form>
+<!-- /form -->
+</div>
+<!-- ./container -->

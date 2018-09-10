@@ -1,0 +1,109 @@
+<div class="container">
+  <form class="form-horizontal" [formGroup]="editCarTypeForm" role="form" (ngSubmit)="onSubmit()">
+    <h2>edit car type</h2>
+
+    <table class="table-responsive ">
+      <thead>
+        <tr>
+          <th></th>
+          <th>previous value</th>
+          <th>new value</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <th>Manufacturer</th>
+          <td>{{this.localCarType?.singleCar.Manufacturer}}</td>
+          <td>
+              <div class="form-group">
+              <div class="col-sm-8">
+                <input type="text" formControlName="manufacturer"  [(ngModel)]="this.carTypeToEdit.Manufacturer"  id="manufacturer"
+                  class="form-control">
+              </div>
+            </div></td>
+        </tr>
+
+        <tr>
+          <th>model</th>
+          <td>{{this.localCarType?.singleCar.Model}}</td>
+          <td><div class="form-group">
+              <div class="col-sm-8">
+                  <input [(ngModel)]="this.carTypeToEdit.Model" formControlName="model" type="text"  id="model" class="form-control ">
+              </div>
+          </div></td>
+        </tr>
+
+        <tr>
+            <th>dailyCost</th>
+            <td>{{this.localCarType?.singleCar.DailyCost}}</td>
+            <td><div class="form-group">
+                <div class="col-sm-8">
+                    <input [(ngModel)]="this.carTypeToEdit.DailyCost" formControlName="dailyCost" type="number"  id="dailyCost" class="form-control ">
+                </div>
+            </div></td>
+          </tr>
+
+          <tr>
+            <th>dayOverdueCost</th>
+            <td>{{this.localCarType?.singleCar.DayOverdueCost}}</td>
+            <td><div class="form-group">
+                <div class="col-sm-8">
+                    <input [(ngModel)]="this.carTypeToEdit.DayOverdueCost"  formControlName="dayOverdueCost" type="number"  id="dayOverdueCost" class="form-control ">
+                </div>
+            </div></td>
+          </tr>
+
+          <tr>
+            <th>isManual</th>
+            <td>{{this.localCarType.singleCar?.IsManual}}</td>
+            <td>  <div class="form-group">
+              <div class="col-sm-8">
+                  <div class="row">
+   
+                          <label class="radio-inline">
+                              <input type="radio"  id="manual" value="true"name="isManual" [(ngModel)]="this.carTypeToEdit.IsManual" formControlName="isManual" >manual
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" id="automatic" value="false" formControlName="isManual" [(ngModel)]="this.carTypeToEdit.IsManual" name="isManual">automatic
+                            </label>
+                     
+                  </div>
+              </div>
+          </div></td>
+          </tr>
+
+          <tr>
+            <th>manufacturYear</th>
+            <td>{{this.localCarType.singleCar?.ManufacturYear}}</td>
+            <td><div class="form-group">
+                <div class="col-sm-8">
+                    <input [(ngModel)]="this.carTypeToEdit.ManufacturYear"  formControlName="manufacturYear" type="text"  id="manufacturYear" class="form-control ">
+                </div>
+            </div></td>
+          </tr>
+
+      </tbody>
+    </table>
+   
+
+
+
+  
+
+
+
+    <div class="form-group">
+      <div class="col-sm-6 col-sm-offset-3">
+
+      </div>
+    </div>
+    <button type="submit" [disabled]="loading"  class="button light-black  btn-block">Save Changes</button>
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+    />
+
+
+  </form>
+  <!-- /form -->
+</div>
+<!-- ./container -->

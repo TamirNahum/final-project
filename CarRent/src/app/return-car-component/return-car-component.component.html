@@ -1,0 +1,45 @@
+
+<input [(ngModel)]="this.carNumber" type="text">
+<input type="submit" value="submit" (click)="onSubmit()" >
+
+<table>
+  <thead>
+    <tr>
+        <th>Orderd by</th>
+
+      <th>Description</th>
+      <th>Kilometerage</th>
+      <th>Rent start</th>
+      
+      <th>Branch</th>
+      <th>Price for a day</th>
+      <th>Total Price</th>
+      <th>Return Date</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of this.orderList.orderList">
+        <td>{{order.User.FullName}}</td>
+
+      <td>{{order.Car.CarType.Manufacturer}} {{order.Car.CarTypeModel.Model}},{{order.Car.CarTypeModel.ManufacturYear}}</td>
+      <td> {{order.Car.Kilometerage}} KM</td>
+      <td><strong> {{order.StartRentDate | date:'fullDate'}}</strong></td>
+      
+      <td> {{order.Car.Branch.BranchName}}</td>
+      <td> {{order.Car.CarTypeModel.DailyCost}}$</td>
+      <td *ngIf="order.ReturnDate"> <strong>{{order.TotalPrice}}$</strong></td>
+      <td *ngIf="!order.ReturnDate"> the rent is not over yet</td>
+      <td *ngIf="!order.ReturnDate"> <button (click)="returnCar(order)">Return this car</button> </td>
+      <td *ngIf="order.ReturnDate"><strong>{{order.ReturnDate | date:'fullDate'}}</strong>  </td>
+
+    </tr>
+   
+  </tbody>
+</table>
+
+
+ 
+
+
+
