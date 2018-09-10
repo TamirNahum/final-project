@@ -1,0 +1,6 @@
+C:\Users\תמיר\Desktop\CarRentProject\BOL\bin\Debug\BOL.dll
+C:\Users\תמיר\Desktop\CarRentProject\BOL\bin\Debug\BOL.pdb
+C:\Users\תמיר\Desktop\CarRentProject\BOL\obj\Debug\BOL.csprojResolveAssemblyReference.cache
+C:\Users\תמיר\Desktop\CarRentProject\BOL\obj\Debug\BOL.csproj.CoreCompileInputs.cache
+C:\Users\תמיר\Desktop\CarRentProject\BOL\obj\Debug\BOL.dll
+C:\Users\תמיר\Desktop\CarRentProject\BOL\obj\Debug\BOL.pdb
