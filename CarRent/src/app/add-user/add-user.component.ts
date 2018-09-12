@@ -103,10 +103,24 @@ export class AddUserComponent implements OnInit {
       });
   }else{
     this.localUser.Image="UserImages/default-user.jpg";
+    this.myUserService.addUser(this.localUser).pipe(first()).subscribe(
+      data => {
+        this.alertService.success('Registration successful', true);
+        this.router.navigate(['/Log-In']);
+      },
+      error => {
+        this.alertService.error("error");
+        this.loading = false;
+      });
   }
     }
 
   ngOnInit() {
+    if(this.myUserService.userList.singleUser.UserRole!=1){
+      this.router.navigate(['/Home']);
+      return;
+
+    }
   }
 
 

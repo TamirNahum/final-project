@@ -57,13 +57,17 @@ export class EditUserComponent implements OnInit {
       ),
 
     });
-    this.userToEdit.Image = "";
+    
 
   }
 
 
   ngOnInit() {
+    if(this.myUserService.userList.singleUser.UserRole!=1){
+      this.router.navigate(['/Home']);
+      return;
 
+    }
   }
 
   ngOnChanges(){

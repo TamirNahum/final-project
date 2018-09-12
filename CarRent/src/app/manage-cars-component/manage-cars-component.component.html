@@ -11,18 +11,22 @@
 <table>
   <thead>
     <tr>
+        <th></th>
       <th>Car Number</th>
       <th>Kilometerage</th>
-      <th>Is Proper For Rent</th>
+      <th>Is Proper For Rent?</th>
       <th>Available At Branch</th>
       <th>edit/delete</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let car of this.carList.carList">
+      <td><img src="{{link}}/{{car.Image}}" style="width:50px;height:50px;"></td>
       <td>{{car.CarNumber}}</td>
       <td> {{car.Kilometerage}}KM</td>
-      <td> {{car.IsProperForRent}}</td>
+      <td *ngIf="car.IsProperForRent"> proper for rent</td>
+      <td *ngIf="!car.IsProperForRent">not proper for rent</td>
+
       <td><strong> {{car.Branch.BranchName}}</strong></td>
 
       <td>

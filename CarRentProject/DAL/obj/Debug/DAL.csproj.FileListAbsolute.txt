@@ -9,3 +9,14 @@ C:\Users\תמיר\Desktop\CarRentProject\DAL\obj\Debug\DAL.csprojResolveAssembly
 C:\Users\תמיר\Desktop\CarRentProject\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 C:\Users\תמיר\Desktop\CarRentProject\DAL\obj\Debug\DAL.dll
 C:\Users\תמיר\Desktop\CarRentProject\DAL\obj\Debug\DAL.pdb
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\bin\Debug\DAL.dll.config
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\bin\Debug\DAL.dll
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\bin\Debug\DAL.pdb
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\bin\Debug\EntityFramework.dll
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\bin\Debug\EntityFramework.xml
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\obj\Debug\DAL.dll
+C:\Users\תמיר\Desktop\final-project\CarRentProject\DAL\obj\Debug\DAL.pdb

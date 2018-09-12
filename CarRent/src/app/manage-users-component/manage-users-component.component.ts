@@ -17,6 +17,11 @@ export class ManageUsersComponentComponent implements OnInit {
     constructor(private myUserService: UserService, private router: Router, private alertService: AlertService) { }
   
     ngOnInit() {
+      if(this.myUserService.userList.singleUser.UserRole!=1){
+        this.router.navigate(['/Home']);
+        return;
+  
+      }
       this.myUserService.getAllUsers().then(()=>this.userList=this.myUserService.userList);
   
     }

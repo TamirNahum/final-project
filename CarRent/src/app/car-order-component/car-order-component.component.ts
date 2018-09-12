@@ -12,13 +12,12 @@ import { OrderList } from '../shared/models/order-list.model';
 })
 export class CarOrderComponentComponent implements OnInit {
 
-  carList:CarInfoList;
-  orderList:OrderList;
+  carList:CarInfoList=new CarInfoList();
+  orderList:OrderList=new OrderList();
   constructor(private myCarService: CarService,private myOrderService: OrderService) { }
 
   ngOnInit() {
     this.carList=this.myCarService.carInfo;
-    debugger;
     this.orderList=this.myOrderService.orderList;
   }
 }

@@ -9,20 +9,23 @@
                 <div *ngIf="registerForm.controls.fullName.errors!=null&&registerForm.controls.fullName.errors.minlength">
                     Name must be at least 4 characters long.
                 </div>
-              
+
             </div>
         </div>
         <div class="form-group">
             <label for="userName" class="col-sm-3 control-label">UserName*</label>
             <div class="col-sm-9">
                 <input type="text" id="userName" placeholder="UserName" class="form-control" [(ngModel)]="localUser.UserName" formControlName="userName">
+                <div *ngIf="registerForm.controls.userName.errors!=null&&registerForm.controls.userName.errors.minlength">
+                    UserName must be at least 4 characters long.
+                </div>
             </div>
         </div>
         <div class="form-group">
             <label for="idNumber" class="col-sm-3 control-label">Id Number*</label>
             <div class="col-sm-9">
                 <input type="text" id="idNumber" placeholder="idNumber" class="form-control" [(ngModel)]="localUser.IdNumber" formControlName="idNumber">
-                <div *ngIf="registerForm.controls.idNumber.errors!=null&&registerForm.controls.idNumber.errors.pattern">
+                <div *ngIf="registerForm.controls.idNumber.errors!=null&&(registerForm.controls.idNumber.errors.pattern||registerForm.controls.idNumber.errors.maxlength)">
                     ID number must be 9 digits and without letters
                 </div>
             </div>
@@ -40,6 +43,9 @@
             <label for="password" class="col-sm-3 control-label">Password*</label>
             <div class="col-sm-9">
                 <input type="password" id="password" placeholder="Password" class="form-control" [(ngModel)]="localUser.Password" formControlName="password">
+                <div *ngIf="registerForm.controls.password.errors!=null&&(registerForm.controls.password.errors.minlength||registerForm.controls.password.errors.maxlength)">
+                    you must enter a password with 6-10 length 
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -48,8 +54,10 @@
                 <input type="password" id="confirmPassword" [(ngModel)]="this.confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword"
                     class="form-control">
                 <div *ngIf="this.confirmPassword!=localUser.Password">
-
                     password must match
+                </div>
+                <div *ngIf="registerForm.controls.confirmPassword.errors!=null&&(registerForm.controls.confirmPassword.errors.minlength||registerForm.controls.confirmPassword.errors.maxlength)">
+                    you must enter a password with 6-10 length 
                 </div>
             </div>
         </div>
@@ -89,14 +97,13 @@
 
         <div class="form-group">
             <label class="control-label col-sm-3">Image Upload</label>
-                <div>
-                    <input class=" col-sm-2"  type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
-                    <img *ngIf="imageUrl" class=" col-sm-4" [src]="imageUrl" style="width:200px;height:200px;display:block;">
-                </div>
-        
-                <button  class="btn btn-default col-sm-2" type="submit"  [disabled]="Image.value==''||!localUser.UserName"> upload image</button>
-            
-        
+            <div>
+                <input class=" col-sm-2" type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+                <img *ngIf="imageUrl" class=" col-sm-4" [src]="imageUrl" style="width:200px;height:200px;display:block;">
+            </div>
+
+
+
         </div>
         <!-- /.form-group -->
         <div class="form-group">

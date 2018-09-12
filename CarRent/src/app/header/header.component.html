@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <div class="container text-center">
-    <h1>Car Rent</h1>
-    <p>Mission, Vission & Values</p>
+    <h1>Car Rent Store</h1>
+    <p>Best Cars - Best Prices</p>
   </div>
 </div>
 
@@ -14,7 +14,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" *ngIf="this.myUserService.userList.singleUser">Hello {{this.myUserService.userList.singleUser?.FullName}}</a>
-      <img *ngIf="this.myUserService.userList.singleUser.UserName" class="img-responsive" src="http://localhost:50181/{{this.myUserService.userList.singleUser?.Image}}">
+      <img *ngIf="this.myUserService.userList.singleUser.UserName" class="img-responsive" src="{{this.link}}/{{this.myUserService.userList.singleUser?.Image}}">
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">

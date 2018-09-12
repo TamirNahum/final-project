@@ -9,6 +9,7 @@ import { CarTypeService } from '../shared/services/car-type-info.service';
 import { CarTypeInfo } from '../shared/models/car-type-info.model';
 import { BranchService } from '../shared/services/branch.service';
 import { BranchInfo } from '../shared/models/branch-info.model';
+import { UserService } from '../shared/services/user-info.service';
 
 @Component({
   selector: 'app-edit-car-component',
@@ -28,7 +29,7 @@ export class EditCarComponentComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder,private myBranchService:BranchService,private myCarTypeService:CarTypeService, private myCarService: CarService, private router: Router, private alertService: AlertService) {
+  constructor(private formBuilder: FormBuilder,private myUserService:UserService,private myBranchService:BranchService,private myCarTypeService:CarTypeService, private myCarService: CarService, private router: Router, private alertService: AlertService) {
     this.localCar = this.myCarService.carInfo;
     this.carToEdit = {
       CarId: this.myCarService.carInfo.singleCar.CarId,
@@ -62,7 +63,11 @@ export class EditCarComponentComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.myUserService.userList.singleUser.UserRole!=1){
+      this.router.navigate(['/Home']);
+      return;
 
+    }
   }
   setSelectedBranch(branch:BranchInfo){
     this.selectedBranch=branch;

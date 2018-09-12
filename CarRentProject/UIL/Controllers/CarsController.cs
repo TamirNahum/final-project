@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Net;
-using System.Net.Http;
 using System.Net.Http.Formatting;
 
 using System.Web.Http.Cors;
@@ -13,13 +8,15 @@ using System.Web.Http.Cors;
 
 using BOL;
 using BLL;
+using UIL.Filters;
 
 namespace UIL.Controllers
 {
-   [EnableCors("*", "*", "*")]
+    [EnableCors("*", "*", "*")]
     [RoutePrefix("api/Cars")]
     public class CarsController : ApiController
     {
+        [AllowAnonymous]
         public HttpResponseMessage Get()
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -27,8 +24,19 @@ namespace UIL.Controllers
                 Content = new ObjectContent<CarModel[]>(CarsManager.SelectAllCars(), new JsonMediaTypeFormatter())
             };
         }
+        [HttpGet]
+        [Route("getProper")]
+        [AllowAnonymous]
+        public HttpResponseMessage GetProper()
+        {
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<CarModel[]>(CarsManager.SelectAllProperCars(), new JsonMediaTypeFormatter())
+            };
+        }
 
         // GET: api/Cars/5
+        [AllowAnonymous]
         public HttpResponseMessage Get(string carNumber)
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -37,7 +45,21 @@ namespace UIL.Controllers
             };
         }
 
+        [HttpGet]
+        [Route("isExist")]
+        [AllowAnonymous]
+        public HttpResponseMessage IsExist(string carNumber)
+        {
+
+            if (CarsManager.IsCarExists(carNumber))
+                return new HttpResponseMessage(HttpStatusCode.OK);
+
+            return new HttpResponseMessage(HttpStatusCode.BadGateway);
+          
+        }
+
         [Route("getManual")]
+        [AllowAnonymous]
         public HttpResponseMessage GetByIsManual(string isManual)
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -46,6 +68,7 @@ namespace UIL.Controllers
             };
         }
         [Route("getCompany")]
+        [AllowAnonymous]
         public HttpResponseMessage GetByCompany(string manufacturer)
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -55,6 +78,7 @@ namespace UIL.Controllers
         }
 
         [Route("getModel")]
+        [AllowAnonymous]
         public HttpResponseMessage GetByModel(string model)
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -64,6 +88,7 @@ namespace UIL.Controllers
         }
 
         [Route("getYear")]
+        [AllowAnonymous]
         public HttpResponseMessage GetByManufecturYear(int manufecturYear)
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -72,6 +97,8 @@ namespace UIL.Controllers
             };
         }
         // POST: api/Cars
+        [BasicAuthFilter]
+        [Authorize(Roles = "admin")]
         public HttpResponseMessage Post([FromBody]CarModel value)
         {
             bool insertResult = false;
@@ -88,6 +115,8 @@ namespace UIL.Controllers
         }
 
         // PUT: api/Cars/5
+        [BasicAuthFilter]
+        [Authorize(Roles = "admin")]
         public HttpResponseMessage Put(int id, [FromBody]CarModel value)
         {
             bool updateResult = false;
@@ -105,6 +134,8 @@ namespace UIL.Controllers
         }
 
         // DELETE: api/Cars/5
+        [BasicAuthFilter]
+        [Authorize(Roles = "admin")]
         public HttpResponseMessage Delete(int carId)
         {
             bool deleteResult = CarsManager.DeleteCar(carId);

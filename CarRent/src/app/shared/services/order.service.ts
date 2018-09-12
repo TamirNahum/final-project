@@ -8,13 +8,14 @@ import { OrderList } from "../models/order-list.model";
 import { DatePipe } from '@angular/common';
 import { first } from 'rxjs/operators';
 import { UserService } from "./user-info.service";
+import { MyLink } from "./my-link.service";
 
 
 
 
 @Injectable()
 export class OrderService {
-    private link="http://localhost:50181/api/Order";
+    private link=MyLink.link+"/api/Order";
     orderList:OrderList=new OrderList();
     private pipe = new DatePipe("en-US");
    
@@ -65,7 +66,9 @@ deleteOrder(orderId:number):Observable<boolean>{
                 let start: any = new Date(this.pipe.transform(order.StartRentDate));
                 let end: any = new Date(this.pipe.transform(order.EndOfRentDate));
                 let returnDate: any = new Date(this.pipe.transform(order.ReturnDate));
-                order.TotalPrice=(((end-start) / (24 * 3600 * 1000) + 1)*order.Car.CarTypeModel.DailyCost)+((returnDate-end)/ (24 * 3600 * 1000) + 1)*order.Car.CarTypeModel.DayOverdueCost;
+                order.TotalPrice=(((end-start) / (24 * 3600 * 1000) + 1)*order.Car.CarTypeModel.DailyCost);
+                if(returnDate>end)
+                order.TotalPrice+=((returnDate-end)/ (24 * 3600 * 1000) + 1)*order.Car.CarTypeModel.DayOverdueCost;
             }
         
         } 

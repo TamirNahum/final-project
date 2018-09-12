@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MyLink } from '../shared/services/my-link.service';
 
 @Component({
   selector: 'app-home-component',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponentComponent implements OnInit {
 
+  link:string=MyLink.link;
   constructor() { }
 
   ngOnInit() {

@@ -38,6 +38,7 @@ import { EditCarTypeComponent } from './edit-car-type/edit-car-type.component';
 import { AddCarTypeComponent } from './add-car-type/add-car-type.component';
 import { ManageCarTypesComponent } from './manage-car-types/manage-car-types.component';
 import { UploadImageService } from './shared/services/upload-image.service';
+import { MyLink } from './shared/services/my-link.service';
 
 
 const appRoutes: Routes = [
@@ -119,7 +120,8 @@ const appRoutes: Routes = [
     AlertService,
     OrderService,
     BranchService,
-    UploadImageService
+    UploadImageService,
+    MyLink
     
   ],
   bootstrap: [AppComponent]

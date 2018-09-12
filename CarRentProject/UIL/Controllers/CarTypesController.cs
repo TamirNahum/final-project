@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Net;
-using System.Net.Http;
 using System.Net.Http.Formatting;
 
 using System.Web.Http.Cors;
@@ -12,12 +9,15 @@ using System.Web.Http.Cors;
 
 using BOL;
 using BLL;
+using UIL.Filters;
 
 namespace UIL.Controllers
 {
     [EnableCors("*", "*", "*")]
     public class CarTypesController : ApiController
     {
+        [BasicAuthFilter]
+        [AllowAnonymous]
         public HttpResponseMessage Get()
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -39,6 +39,8 @@ namespace UIL.Controllers
         }
 
         // POST: api/CarTypes
+        [BasicAuthFilter]
+        [Authorize(Roles = "admin")]
         public HttpResponseMessage Post([FromBody]CarTypeModel value)
         {
             bool insertResult = false;
@@ -55,6 +57,8 @@ namespace UIL.Controllers
         }
 
         // PUT: api/CarTypes/5
+        [BasicAuthFilter]
+        [Authorize(Roles = "admin")]
         public HttpResponseMessage Put(int id, [FromBody]CarTypeModel value)
         {
             bool updateResult = false;
@@ -72,6 +76,8 @@ namespace UIL.Controllers
         }
 
         // DELETE: api/CarTypes/5
+        [BasicAuthFilter]
+        [Authorize(Roles = "admin")]
         public HttpResponseMessage Delete(int carTypeId)
         {
             bool deleteResult = CarTypesManager.DeleteCarType(carTypeId);

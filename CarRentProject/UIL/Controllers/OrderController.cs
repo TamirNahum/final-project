@@ -1,8 +1,5 @@
 ﻿using BLL;
 using BOL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -47,9 +44,8 @@ namespace UIL.Controllers
                 Content = new ObjectContent<OrderModel>(OrdersManager.SelectOrderByOrderId(orderId), new JsonMediaTypeFormatter())
             };
         }
-
-        [BasicAuthFilter]
-        [Authorize(Roles = "worker,admin")]
+        
+        [AllowAnonymous]
         public HttpResponseMessage Get(string carNumber)
         {
             return new HttpResponseMessage(HttpStatusCode.OK)

@@ -10,6 +10,7 @@ import { CarService } from '../shared/services/car-info.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../shared/services/alert.service';
 import { UploadImageService } from '../shared/services/upload-image.service';
+import { UserService } from '../shared/services/user-info.service';
 
 @Component({
   selector: 'app-add-car-component',
@@ -31,7 +32,7 @@ export class AddCarComponentComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder,private myBranchService:BranchService,private imageService: UploadImageService,private myCarTypeService:CarTypeService, private myCarService: CarService, private router: Router, private alertService: AlertService) {
+  constructor(private formBuilder: FormBuilder,private myUserService:UserService,private myBranchService:BranchService,private imageService: UploadImageService,private myCarTypeService:CarTypeService, private myCarService: CarService, private router: Router, private alertService: AlertService) {
     this.carToEdit = {
       CarId: undefined,
       CarType:undefined,
@@ -64,7 +65,13 @@ export class AddCarComponentComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.myUserService.userList.singleUser.UserRole!=1){
+      this.router.navigate(['/Home']);
+      return;
 
+    }
+    this.myCarTypeService.initCars();
+      
   }
 
   ////////////////////////////////
@@ -82,11 +89,11 @@ export class AddCarComponentComponent implements OnInit {
   }
 
   onUpload(caption:string) {
-if(this.fileToUpload){
+    if(this.fileToUpload){
   debugger;
   // .subscribe(data => { this.localUser.Image=`UserImages/${caption}.jpg`},()=>{  this.localUser.Image="UserImages/default-user.jpg";
    return this.imageService.postCarFile(caption, this.fileToUpload)
-   .subscribe(data => { this.carToEdit.Image=`CarImages/${caption}.jpg`;    this.myCarService.addCar(this.carToEdit).subscribe(
+   .subscribe(data => { this.carToEdit.Image=`CarImages/${caption}.jpg`; this.myCarService.addCar(this.carToEdit).subscribe(
     data => {
       this.alertService.success('edited successful', true);
       this.myCarService.initCars();
@@ -98,6 +105,16 @@ if(this.fileToUpload){
     });}),()=>{this.carToEdit.Image="CarImages/default-car.jpg"; };
 }else{
   this.carToEdit.Image="CarImages/default-car.jpg";
+  this.myCarService.addCar(this.carToEdit).subscribe(
+    data => {
+      this.alertService.success('edited successful', true);
+      this.myCarService.initCars();
+      this.router.navigate(['/Manage-Cars']);
+    },
+    error => {
+      this.alertService.error("error");
+      this.loading = false;
+    });
   return new Promise(()=>{});
 }
   }
@@ -117,7 +134,7 @@ if(this.fileToUpload){
 
   onSubmit() {
     this.submitted = true;
- 
+   
     // stop here if form is invalid
     /* if (this.editOrderForm.invalid) {
       this.alertService.error("you must fill all the fields");
@@ -126,9 +143,16 @@ if(this.fileToUpload){
     this.carToEdit.AvailableAtBranch=this.carToEdit.Branch.BranchId;
     this.carToEdit.CarType=this.carToEdit.CarTypeModel.CarTypeId;
 
-
+debugger;
     this.loading = true;
-    this.onUpload(this.carToEdit.CarNumber);
+    this.myCarService.isExist(this.carToEdit.CarNumber).subscribe(
+      ()=>{ 
+         this.loading=false;
+      this.alertService.error("there is a car with this lisence number")
+      this.submitted=false;
+    }
+      ,()=> {this.onUpload(this.carToEdit.CarNumber);});
+    
 
     
     

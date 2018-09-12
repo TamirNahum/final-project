@@ -5,6 +5,8 @@ import { CarService } from '../shared/services/car-info.service';
 import { CarTypeService } from '../shared/services/car-type-info.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../shared/services/alert.service';
+import { UserService } from '../shared/services/user-info.service';
+import { MyLink } from '../shared/services/my-link.service';
 
 @Component({
   selector: 'app-manage-cars-component',
@@ -16,11 +18,17 @@ export class ManageCarsComponentComponent implements OnInit {
   carList:CarInfoList;
   carTypeList:CarTypeInfoList;
   loading = false;
+  link:string=MyLink.link;
 
   
-  constructor(private myCarService: CarService,private myCarTypeService: CarTypeService,private router: Router, private alertService: AlertService) { }
+  constructor(private myCarService: CarService,private myUserService:UserService,private myCarTypeService: CarTypeService,private router: Router, private alertService: AlertService) { }
 
   ngOnInit() {
+    if(this.myUserService.userList.singleUser.UserRole!=1){
+      this.router.navigate(['/Home']);
+      return;
+
+    }
     this.carList=this.myCarService.carInfo;
     this.carTypeList=this.myCarTypeService.carTypeInfo;
   }

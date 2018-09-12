@@ -6,6 +6,9 @@ import { OrderService } from '../shared/services/order.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../shared/services/alert.service';
 import { first } from 'rxjs/operators';
+import { UserService } from '../shared/services/user-info.service';
+import { pipe } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-order',
@@ -24,7 +27,7 @@ export class EditOrderComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder, private myOrderService: OrderService, private router: Router, private alertService: AlertService) {
+  constructor(private formBuilder: FormBuilder,private myUserService:UserService,private myAlertService:AlertService, private myOrderService: OrderService, private router: Router, private alertService: AlertService) {
 
     this.localOrder=this.myOrderService.orderList;
     this.startDate=this.localOrder.singleOrder.StartRentDate;
@@ -49,6 +52,11 @@ this.returnDate=this.localOrder.singleOrder.ReturnDate;
   }
 
   ngOnInit() {
+    if(this.myUserService.userList.singleUser.UserRole!=1){
+      this.router.navigate(['/Home']);
+      return;
+
+    }
 
   }
 
@@ -61,11 +69,24 @@ this.returnDate=this.localOrder.singleOrder.ReturnDate;
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
-    /* if (this.editOrderForm.invalid) {
-      this.alertService.error("you must fill all the fields");
-         return;
-     }*/
+   
+    let pipe = new DatePipe("en-US"); // Use your own locale
+    let start: any = new Date(pipe.transform(this.startDate));
+    let end: any = new Date(pipe.transform(this.endDate));
+    let dateReturn: any = new Date(pipe.transform(this.returnDate));
+
+    if (end - start < 0) {
+      this.myAlertService.error("end of rent date must be late than the start rent day");
+      return false;
+
+    }
+    if (dateReturn - start < 0) {
+      this.myAlertService.error("return date  must be late than the start rent day");
+      return false;
+
+    }
+    
+
      this.localOrder.singleOrder.EndOfRentDate=this.endDate;
      this.localOrder.singleOrder.StartRentDate=this.startDate;
      this.localOrder.singleOrder.ReturnDate=this.returnDate

@@ -5,12 +5,18 @@
         <div class="container">
             <div class="col-sm-12">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">{{this.carList.singleCar?.CarTypeModel.Manufacturer}} {{this.carList.singleCar?.CarTypeModel.Model}}</div>
+                    <div class="panel-heading">{{this.carList.singleCar?.CarTypeModel.ManufacturYear}} {{this.carList.singleCar?.CarTypeModel.Manufacturer}} {{this.carList.singleCar?.CarTypeModel.Model}}</div>
                     <div class="panel-body">
+                        <img *ngIf="this.carList.singleCar" src="{{this.link}}/{{this.carList.singleCar.Image}}" style="width:500px;height:200px;" alt="">
                         <div class="list-group">
-                            <p class="list-group-item">{{this.carList.singleCar?.CarNumber}}</p>
-                            <p class="list-group-item">{{this.carList.singleCar?.CarTypeModel.DailyCost}}</p>
-                            <p class="list-group-item">Third item</p>
+                            <p class="list-group-item">car number {{this.carList.singleCar?.CarNumber}}</p>
+                            <p *ngIf="this.carList.singleCar?.CarTypeModel.IsManual==true" class="list-group-item">Manual Gear</p>
+                            <p *ngIf="this.carList.singleCar?.CarTypeModel.IsManual==false" class="list-group-item">Automatic Gear</p>
+                            <p class="list-group-item">kilometerage {{this.carList.singleCar?.Kilometerage}}KM</p>
+                            <p class="list-group-item">Avilable at Branch {{this.carList.singleCar?.Branch.BranchName}}</p>
+                            <p class="list-group-item">{{this.carList.singleCar?.CarTypeModel.DailyCost}}$ for a day</p>
+                            <p class="list-group-item">{{this.carList.singleCar?.CarTypeModel.DayOverdueCost}}$ for every day late</p>
+                       
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using UIL.Filters;
 
 namespace UIL.Controllers
 {
@@ -15,6 +16,8 @@ namespace UIL.Controllers
     public class UserController : ApiController
     {
         // GET: api/User
+        [BasicAuthFilter]
+        [Authorize(Roles = "admin")]
         public HttpResponseMessage Get()
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -24,6 +27,8 @@ namespace UIL.Controllers
         }
 
         // GET: api/User/5
+        [BasicAuthFilter]
+        [Authorize(Roles = "admin")]
         public HttpResponseMessage Get(int userId)
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -33,6 +38,7 @@ namespace UIL.Controllers
         }
 
         [Route("api/User/{userName}/{password}")]
+        [AllowAnonymous]
         public HttpResponseMessage Get(string userName,string password)
         {
             UserModel user = UserManager.SelectUserByUserNameAndPassword(userName, password);
@@ -47,6 +53,7 @@ namespace UIL.Controllers
         }
 
         // POST: api/User
+       [AllowAnonymous]
         public HttpResponseMessage Post([FromBody]UserModel value)
         {
             bool insertResult = false;
@@ -63,6 +70,8 @@ namespace UIL.Controllers
         }
 
         // PUT: api/User/5
+        [BasicAuthFilter]
+        [Authorize(Roles = "admin")]
         public HttpResponseMessage Put(int id, [FromBody]UserModel value)
         {
             bool updateResult = false;
@@ -78,6 +87,8 @@ namespace UIL.Controllers
             return new HttpResponseMessage(responseCode) { Content = new ObjectContent<bool>(updateResult, new JsonMediaTypeFormatter()) };
         }
         // DELETE: api/User/5
+        [BasicAuthFilter]
+        [Authorize(Roles = "admin")]
         public HttpResponseMessage Delete(int userId)
         {
             bool deleteResult = UserManager.DeleteUser(userId);

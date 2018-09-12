@@ -3,6 +3,7 @@ import { OrderService } from '../shared/services/order.service';
 import { OrderList } from '../shared/models/order-list.model';
 import { Router } from '@angular/router';
 import { AlertService } from '../shared/services/alert.service';
+import { UserService } from '../shared/services/user-info.service';
 
 @Component({
   selector: 'app-manage-orders-component',
@@ -13,9 +14,14 @@ export class ManageOrdersComponentComponent implements OnInit {
 private orderList:OrderList=new OrderList();
 loading = false;
 
-  constructor(private myOrderService: OrderService, private router: Router, private alertService: AlertService) { }
+  constructor(private myOrderService: OrderService,private myUserService:UserService, private router: Router, private alertService: AlertService) { }
 
   ngOnInit() {
+    if(this.myUserService.userList.singleUser.UserRole!=1){
+      this.router.navigate(['/Home']);
+      return;
+
+    }
     this.myOrderService.getAllOrders().then(()=>this.orderList=this.myOrderService.orderList).catch(()=>{console.log("not a manager failed")});
 
   }

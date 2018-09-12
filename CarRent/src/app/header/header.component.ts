@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user-info.service';
+import {MyLink} from '../shared/services/my-link.service'
 
 @Component({
   selector: 'app-header',
@@ -7,6 +8,7 @@ import { UserService } from '../shared/services/user-info.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  link:string=MyLink.link;
 
   constructor(private myUserService: UserService) { }
 

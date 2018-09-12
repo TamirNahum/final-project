@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { CarTypeService } from '../shared/services/car-type-info.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../shared/services/alert.service';
+import { UserService } from '../shared/services/user-info.service';
 
 @Component({
   selector: 'app-edit-car-type',
@@ -22,7 +23,7 @@ export class EditCarTypeComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder, private myCarTypeService: CarTypeService, private router: Router, private alertService: AlertService) {
+  constructor(private formBuilder: FormBuilder,private myUserService:UserService, private myCarTypeService: CarTypeService, private router: Router, private alertService: AlertService) {
 
     this.localCarType=this.myCarTypeService.carTypeInfo;
     this.carTypeToEdit={
@@ -57,7 +58,11 @@ export class EditCarTypeComponent implements OnInit {
 
 
   ngOnInit() {
+    if(this.myUserService.userList.singleUser.UserRole!=1){
+      this.router.navigate(['/Home']);
+      return;
 
+    }
   }
 
   ngOnChanges(){

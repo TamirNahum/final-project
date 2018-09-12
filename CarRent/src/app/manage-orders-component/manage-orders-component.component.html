@@ -10,6 +10,7 @@
       <thead>
         <tr>
           <th>Orderd by</th>
+          <th>Car Number</th>
 
           <th>Description</th>
           <th>Kilometerage</th>
@@ -24,6 +25,8 @@
       <tbody>
         <tr *ngFor="let order of this.orderList.orderList">
           <td> {{order.User.FullName}}</td>
+          <td> {{order.Car.CarNumber}}</td>
+
           <td>{{order.Car.CarTypeModel.Manufacturer}} {{order.Car.CarTypeModel.Model}},{{order.Car.CarTypeModel.ManufacturYear}}</td>
           <td> {{order.Car.Kilometerage}} KM</td>
           <td>

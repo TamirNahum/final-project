@@ -25,9 +25,7 @@
             <li>
               <a (click)="replaceDropDownLabel('Model')">Model </a>
             </li>
-            <li>
-              <a (click)="replaceDropDownLabel('Date Range')">Date Range</a>
-            </li>
+   
           </ul>
         </div>
         <input type="hidden" name="search_param" value="all" id="search_param">
@@ -71,20 +69,20 @@
 <!--        <img src= class="img-responsive" style="width:100%" alt="Image">
 -->
 <div class="container">
-  <div class="row"></div>
   <div class="col-sm-4" *ngFor="let car of carList.carList">
+
     <div class="panel panel-primary">
       <div class="panel-heading">{{car.CarTypeModel.Manufacturer}} {{car.CarTypeModel.Model}}</div>
       <div class="panel-body">
         <img *ngIf="car.Image!=''" src="http://localhost:50181/{{car.Image}}" class="img-responsive" style="width:100%" alt="">
         <img *ngIf="car.Image==''" src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="">
-
       </div>
       <div class="panel-body">
+          <p>car number {{car.CarNumber}} </p>
+        <p>{{car.CarTypeModel.DailyCost}}$ for a day </p>
       </div>
       <div id="buttons">
-        <button class="button light-black" routerLink="../Check-Price" (click)="selectedCar(car.CarNumber)">more Details</button>
-
+        <button class="button light-black"  (click)="selectedCar(car.CarNumber)">more Details</button>
       </div>
     </div>
   </div>

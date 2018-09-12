@@ -11,6 +11,7 @@ using System.Web.Http.Cors;
 namespace UIL.Controllers
 {
     [EnableCors("*", "*", "*")]
+    [AllowAnonymous]
     public class UploadUserImageController : ApiController
     {
         [HttpPost]

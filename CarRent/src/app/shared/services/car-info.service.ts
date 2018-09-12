@@ -3,14 +3,16 @@ import { Injectable } from "@angular/core";
 import { Car } from "../models/car-info.model";
 import { Observable } from "rxjs";
 import { CarInfoList } from "../models/car-info-list.model";
+import { UserService } from "./user-info.service";
+import { MyLink } from "./my-link.service";
 
 
 @Injectable()
 export class CarService {
-    private link = "http://localhost:50181/api/Cars";
+    private link = MyLink.link+"/api/Cars";
     carInfo: CarInfoList = new CarInfoList();
 
-    constructor(private myHttpClient: HttpClient) {
+    constructor(private myHttpClient: HttpClient,private myUserService:UserService) {
         this.initCars();
     }
 
@@ -21,9 +23,19 @@ export class CarService {
             .toPromise().then((x: Array<Car>) => { this.carInfo.carList = x; });
     }
 
+    initProperCars() {
+        return this.myHttpClient.get(`${this.link}/getProper`)
+            .toPromise().then((x: Array<Car>) => { this.carInfo.carList = x; });
+    }
+
     getCar(carNumber: string) {
-        return this.myHttpClient.get(`${this.link}?carNumber=${carNumber}`)
+        return this.myHttpClient.get(`${this.link}/?carNumber=${carNumber}`)
             .toPromise().then((x: Car) => { this.carInfo.singleCar = x; });
+    }
+
+    isExist(carNumber: string) {
+        return this.myHttpClient.get(`${this.link}/isExist/?carNumber=${carNumber}`);
+            
     }
 
     getCarByTransmission(isManual: boolean) {
@@ -51,18 +63,18 @@ export class CarService {
 
     addCar(car: Car) {
 
-        return this.myHttpClient.post(this.link, JSON.stringify(car), { headers: { "content-type": "application/json" } });
+        return this.myHttpClient.post(this.link, JSON.stringify(car), { headers: {"content-type": "application/json",Authorization:`${this.myUserService.userList.singleUser.UserName} ${this.myUserService.userList.singleUser.Password}`}});
 
     }
 
     editCar(car: Car, carId: number) {
         debugger;
-        return this.myHttpClient.put<boolean>(`${this.link}/${carId}`, JSON.stringify(car), { headers: { "content-type": "application/json" } });
+        return this.myHttpClient.put<boolean>(`${this.link}/${carId}`, JSON.stringify(car),{ headers: {"content-type": "application/json",Authorization:`${this.myUserService.userList.singleUser.UserName} ${this.myUserService.userList.singleUser.Password}`}});
     }
 
     deleteCar(carId: number): Observable<boolean> {
         let apiUrl: string = `${this.link}?carId=${carId}`;
-        return this.myHttpClient.delete<boolean>(apiUrl);
+        return this.myHttpClient.delete<boolean>(apiUrl,{ headers: {"content-type": "application/json",Authorization:`${this.myUserService.userList.singleUser.UserName} ${this.myUserService.userList.singleUser.Password}`}});
     }
 
 }

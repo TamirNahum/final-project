@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DAL;
 using BOL;
 
@@ -10,48 +7,7 @@ namespace BLL
 {
     public class CarsManager
     {
-        //!!!!!!when writnig insertOrder func - put null into returnDate until its changed.!!!!
-        public static bool IsCarFreeForRent(string carNumber)
-        {
-            try
-            {
-                using (CarRentDBEntities ef = new CarRentDBEntities())
-                {
-
-                    Car selectedCar = ef.Cars.FirstOrDefault(dbCar => dbCar.CarNumber == carNumber);
-                    if (selectedCar == null)
-                        return false;
-
-
-
-                    OrderModel[] orders = ef.Orders.Where(order => order.CarId == selectedCar.CarId).Select(dbOrder => new OrderModel
-                    {
-                        CarId = dbOrder.CarId,
-                        StartRentDate = dbOrder.StartRentDate,
-                        EndOfRentDate = dbOrder.EndOfRentDate,
-                        ReturnDate = dbOrder.ReturnDate,
-                        UserId = dbOrder.UserId
-                    }
-                     ).ToArray();
-
-                    foreach (var order in orders)
-                    {
-                        if (order.ReturnDate == null || DateTime.Now < order.EndOfRentDate)
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
-
-
-
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+       
 
         public static CarModel[] SelectAllCars()
         {
@@ -101,6 +57,55 @@ namespace BLL
             //}
         }
 
+        public static CarModel[] SelectAllProperCars()
+        {
+            // try
+            {
+                using (CarRentDBEntities ef = new CarRentDBEntities())
+                {
+
+                    return ef.Cars.OrderBy(car => car.CarType).Where(dbCar=>dbCar.IsProperForRent==true)
+                        .Select(dbCar => new CarModel
+                        {
+                            AvailableAtBranch = dbCar.AvailableAtBranch,
+                            CarNumber = dbCar.CarNumber,
+                            CarId = dbCar.CarId,
+                            Image = dbCar.Image,
+
+                            IsProperForRent = dbCar.IsProperForRent,
+
+                            Kilometerage = dbCar.kilometerage,
+                            CarTypeModel = new CarTypeModel
+                            {
+                                CarTypeId = dbCar.CarType1.CarTypeId,
+                                DailyCost = dbCar.CarType1.DailyCost,
+                                DayOverdueCost = dbCar.CarType1.DayOverdueCost,
+                                IsManual = dbCar.CarType1.IsManual,
+                                Manufacturer = dbCar.CarType1.Manufacturer,
+                                ManufacturYear = dbCar.CarType1.ManufacturYear,
+                                Model = dbCar.CarType1.Model
+                            },
+                            Branch = new BranchModel
+                            {
+                                BranchId = dbCar.Branch.BranchId,
+                                Adrress = dbCar.Branch.Adrress,
+                                BranchName = dbCar.Branch.BranchName,
+                                Latitude = dbCar.Branch.Latitude,
+                                Longitude = dbCar.Branch.Longitude
+                            }
+                            //  IsFreeForRent = IsCarFreeForRent(dbCar.CarNumber)
+
+                        }).ToArray();
+
+                }
+            }
+            //catch (Exception)
+            //{
+            //    return null;
+            //}
+        }
+
+
         public static CarModel SelectCarByCarNumber(string carNumber)
         {
             try
@@ -146,6 +151,27 @@ namespace BLL
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public static bool IsCarExists(string carNumber)
+        {
+            try
+            {
+                using (CarRentDBEntities ef = new CarRentDBEntities())
+                {
+
+                    Car car = ef.Cars.FirstOrDefault(dbCar => dbCar.CarNumber == carNumber);
+                    if (car == null)
+                        return false;
+                    return true;
+                 
+                }
+            }
+
+            catch (Exception)
+            {
+                return false;
             }
         }
 

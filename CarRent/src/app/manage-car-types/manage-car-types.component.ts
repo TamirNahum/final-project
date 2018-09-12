@@ -4,6 +4,7 @@ import { CarTypeService } from '../shared/services/car-type-info.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../shared/services/alert.service';
 import { CarTypeInfo } from '../shared/models/car-type-info.model';
+import { UserService } from '../shared/services/user-info.service';
 
 @Component({
   selector: 'app-manage-car-types',
@@ -16,9 +17,14 @@ export class ManageCarTypesComponent implements OnInit {
   private carTypeList:CarTypeInfoList=new CarTypeInfoList();
   loading = false;
   
-    constructor(private myCarTypeService: CarTypeService, private router: Router, private alertService: AlertService) { }
+    constructor(private myCarTypeService: CarTypeService, private myUserService:UserService,private router: Router, private alertService: AlertService) { }
   
     ngOnInit() {
+      if(this.myUserService.userList.singleUser.UserRole!=1){
+        this.router.navigate(['/Home']);
+        return;
+  
+      }
       this.carTypeList=this.myCarTypeService.carTypeInfo;
 
   

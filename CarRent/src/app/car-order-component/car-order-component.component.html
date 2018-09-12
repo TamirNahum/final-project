@@ -1,1 +1,25 @@
-<p>{{this.orderList?.singleOrder.StartRentDate}}</p>
+
+<table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Kilometerage</th>
+            <th>Rent Date</th>
+            <th>Branch</th>
+            <th>Price for a day</th>
+            <th>Price for each day late</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{this.orderList?.singleOrder?.Car?.CarTypeModel.Manufacturer}} {{this.orderList?.singleOrder?.Car?.CarTypeModel.Model}},{{this.orderList?.singleOrder?.Car?.CarTypeModel.ManufacturYear}}</td>
+            <td> {{this.orderList?.singleOrder?.Car.Kilometerage}} KM</td>
+            <td><strong> {{this.orderList?.singleOrder.StartRentDate | date:'fullDate'}} To {{this.orderList?.singleOrder.EndOfRentDate | date:'fullDate'}}</strong></td>
+            <td> {{this.orderList?.singleOrder?.Car.Branch.BranchName}}</td>
+            <td> {{this.orderList?.singleOrder?.Car.CarTypeModel.DailyCost}}$</td>
+            <td> {{this.orderList?.singleOrder?.Car.CarTypeModel.DayOverdueCost}}$</td>
+            
+          </tr>
+         
+        </tbody>
+      </table>

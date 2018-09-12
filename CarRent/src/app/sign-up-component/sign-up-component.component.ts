@@ -48,12 +48,12 @@ export class SignUpComponentComponent implements OnInit {
       idNumber: new FormControl(this.localUser.IdNumber, Validators.compose([
         Validators.required,
 
-        Validators.pattern("^[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]$")])
+        Validators.pattern("^[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]$"),
+      Validators.maxLength(9)])
 
       ),
       birthDate: new FormControl(this.localUser.BirthDate, Validators.compose([
-        Validators.required,
-        Validators.minLength(4)])
+  ])
       ),
       isMale: new FormControl(this.localUser.IsMale, Validators.compose([
         Validators.required])
@@ -70,14 +70,14 @@ export class SignUpComponentComponent implements OnInit {
       ),
       confirmPassword: new FormControl(this.confirmPassword, Validators.compose([
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(6),
         Validators.maxLength(10)])
       ),
 
     });
     this.localUser.Image = null;
     this.localUser.UserRole = 3;
-    this.localUser.Image = "";
+    this.localUser.Image = "UserImages/default-user.jpg";
 
   }
 
@@ -98,10 +98,27 @@ export class SignUpComponentComponent implements OnInit {
   onUpload(caption:string) {
 if(this.fileToUpload){
     this.imageService.postUserFile(caption, this.fileToUpload)
-      .subscribe(data => { this.localUser.Image=`UIL/UserImages/${caption}.jpg`},()=>{  this.localUser.Image="UserImages/default-user.jpg";
+      .subscribe(data => { this.localUser.Image=`UserImages/${caption}.jpg`; this.myUserService.addUser(this.localUser).pipe(first()).subscribe(
+        data => {
+          this.alertService.success('Registration successful', true);
+          this.router.navigate(['/Log-In']);
+        },
+        error => {
+          this.alertService.error("error");
+          this.loading = false;
+        });},()=>{  this.localUser.Image="UserImages/default-user.jpg";
     });
 }else{
   this.localUser.Image="UserImages/default-user.jpg";
+  this.myUserService.addUser(this.localUser).pipe(first()).subscribe(
+    data => {
+      this.alertService.success('Registration successful', true);
+      this.router.navigate(['/Log-In']);
+    },
+    error => {
+      this.alertService.error("error");
+      this.loading = false;
+    });
 }
   }
   ////////////////////////
@@ -125,17 +142,8 @@ if(this.fileToUpload){
     }
     this.onUpload(this.localUser.UserName);
     this.loading = true;
-    let callback = (bool: boolean) => { (bool) ? "action success" : "action fail"; }
     // debugger;
-    this.myUserService.addUser(this.localUser).pipe(first()).subscribe(
-      data => {
-        this.alertService.success('Registration successful', true);
-        this.router.navigate(['/Log-In']);
-      },
-      error => {
-        this.alertService.error("error");
-        this.loading = false;
-      });
+   
   }
 }
 

@@ -4,6 +4,8 @@ import { CarService } from '../shared/services/car-info.service';
 import { CarTypeService } from '../shared/services/car-type-info.service';
 import { CarTypeInfoList } from '../shared/models/car-type-info-list.model';
 import { Car } from '../shared/models/car-info.model';
+import { MyLink } from '../shared/services/my-link.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-list-component',
@@ -18,18 +20,19 @@ export class CarListComponentComponent implements OnInit {
   manufacturer:string;
   manufacturYear:number;
   model:string;
+  link:string=MyLink.link;
 
   filterDropDownName:string="Filter by";
   
-  constructor(private myCarService: CarService,private myCarTypeService: CarTypeService) { }
+  constructor(private myCarService: CarService,private router: Router,private myCarTypeService: CarTypeService) { }
 
   ngOnInit() {
-    this.myCarService.initCars().then(()=>this.carList=this.myCarService.carInfo);
+    this.myCarService.initProperCars().then(()=>this.carList=this.myCarService.carInfo);
     this.carTypeList=this.myCarTypeService.carTypeInfo;
   }
 
   selectedCar(carNumber:string){
-   this.myCarService.getCar(carNumber);
+   this.myCarService.getCar(carNumber).then(()=>this.router.navigate(['/Check-Price']));
  
   }
   setCarList(){

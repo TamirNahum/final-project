@@ -5,10 +5,11 @@
       
       <th>Description</th>
       <th>Kilometerage</th>
-      <th>Rent start</th>
-      
+      <th>Rent Date</th>
+      <th>Return Date</th>
       <th>Branch</th>
       <th>Price for a day</th>
+      <th>Price for each day late</th>
       <th>Total Price</th>
       
     </tr>
@@ -16,12 +17,15 @@
   <tbody>
     <tr *ngFor="let order of this.localOrderList.orderList">
         
-      <td>{{order.Car.CarType.Manufacturer}} {{order.Car.CarTypeModel.Model}},{{order.Car.CarTypeModel.ManufacturYear}}</td>
+      <td>{{order.Car.CarTypeModel.Manufacturer}} {{order.Car.CarTypeModel.Model}},{{order.Car.CarTypeModel.ManufacturYear}}</td>
       <td> {{order.Car.Kilometerage}} KM</td>
-      <td><strong> {{order.StartRentDate | date:'fullDate'}}</strong></td>
-      
+      <td><strong> {{order.StartRentDate | date:'fullDate'}} To {{order.EndOfRentDate | date:'fullDate'}}</strong></td>
+      <td *ngIf="order.ReturnDate"> {{order.ReturnDate| date:'fullDate'}}</td>
+      <td *ngIf="!order.ReturnDate"> the rent isnt over yet</td>
       <td> {{order.Car.Branch.BranchName}}</td>
       <td> {{order.Car.CarTypeModel.DailyCost}}$</td>
+      <td> {{order.Car.CarTypeModel.DayOverdueCost}}$</td>
+      
       <td *ngIf="order.ReturnDate"> {{order.TotalPrice}}$</td>
       <td *ngIf="!order.ReturnDate"> the rent isnt over yet</td>
     </tr>

@@ -11,6 +11,7 @@ import { Car } from '../shared/models/car-info.model';
 import { CarService } from '../shared/services/car-info.service';
 import { OrderService } from '../shared/services/order.service';
 import { CarInfoList } from '../shared/models/car-info-list.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-order-component',
@@ -29,7 +30,7 @@ export class AddOrderComponentComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private myUserService: UserService,private myCarService:CarService,private myOrderService:OrderService, private router: Router, private alertService: AlertService) {
+  constructor(private formBuilder: FormBuilder,private myAlertService:AlertService, private myUserService: UserService,private myCarService:CarService,private myOrderService:OrderService, private router: Router, private alertService: AlertService) {
    this.localOrder.singleOrder={
     StartRentDate:undefined,
     EndOfRentDate:undefined
@@ -64,6 +65,27 @@ export class AddOrderComponentComponent implements OnInit {
 
     this.localOrder.singleOrder.CarId=this.localCar.CarId;
     this.localOrder.singleOrder.UserId=this.localUser.UserId;
+    let pipe = new DatePipe("en-US"); // Use your own locale
+    let start: any = new Date(pipe.transform(this.localOrder.singleOrder.StartRentDate));
+    let end: any = new Date(pipe.transform(this.localOrder.singleOrder.EndOfRentDate));
+    if(this.localOrder.singleOrder.ReturnDate){
+    let dateReturn: any = new Date(pipe.transform(this.localOrder.singleOrder.ReturnDate));
+   
+    if (dateReturn - start < 0) {
+      this.myAlertService.error("return date  must be late than the start rent day");
+      return false;
+    }
+    if (dateReturn - end < 0) {
+      this.localOrder.singleOrder.EndOfRentDate=dateReturn;
+    }
+  }
+    if (end - start < 0) {
+      this.myAlertService.error("end of rent date must be late than the start rent day");
+      return false;
+
+    }
+   
+
 
     this.myOrderService.addOrder(this.localOrder.singleOrder).subscribe(
       data => {
@@ -77,9 +99,14 @@ export class AddOrderComponentComponent implements OnInit {
 
   }
 
+
   ngOnInit() {
-    
-    this.userList=this.myUserService.userList;
+    if(this.myUserService.userList.singleUser.UserRole!=1){
+      this.router.navigate(['/Home']);
+      return;
+
+    }
+    this.myUserService.getAllUsers().then(()=>this.userList=this.myUserService.userList);
     this.carList=this.myCarService.carInfo;
   }
 
