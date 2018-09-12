@@ -45,7 +45,6 @@ export class CheckPriceComponentComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
     this.carList = this.myCarService.carInfo;
     this.myOrderService.getOrderByCarNumber(this.carList.singleCar.CarNumber).then(() => this.localOrderList.orderList = this.myOrderService.orderList.orderList);
 
@@ -94,7 +93,6 @@ export class CheckPriceComponentComponent implements OnInit {
 
 
   checkDates(): boolean {
-    debugger;
     let price = this.carList.singleCar.CarTypeModel.DailyCost;
     let pipe = new DatePipe("en-US"); // Use your own locale
     let start: any = new Date(pipe.transform(this.startDate));

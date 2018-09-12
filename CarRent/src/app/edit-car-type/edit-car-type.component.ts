@@ -81,7 +81,6 @@ export class EditCarTypeComponent implements OnInit {
 
  
     this.loading = true;
-    // debugger;
     this.myCarTypeService.editCarType(this.carTypeToEdit,this.carTypeToEdit.CarTypeId).subscribe(
       data => {
         this.myCarTypeService.initCars();

@@ -51,7 +51,7 @@ addOrder(order:Order) {
      }
 
 editOrder(order:Order,orderId:number){
-    debugger;
+  
   return this.myHttpClient.put<boolean>(`${this.link}/${orderId}`,JSON.stringify(order),{ headers: {"content-type": "application/json",Authorization:`${this.myUserService.userList.singleUser.UserName} ${this.myUserService.userList.singleUser.Password}`}});
 }
 

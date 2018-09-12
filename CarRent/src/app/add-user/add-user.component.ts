@@ -135,7 +135,6 @@ export class AddUserComponent implements OnInit {
     }*/
 
     this.loading = true;
-    // debugger;
     this.onUpload(this.localUser.UserName);
 
     

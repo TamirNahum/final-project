@@ -142,7 +142,6 @@ if(this.fileToUpload){
     }
     this.onUpload(this.localUser.UserName);
     this.loading = true;
-    // debugger;
    
   }
 }

@@ -36,7 +36,6 @@ export class CarListComponentComponent implements OnInit {
  
   }
   setCarList(){
-    debugger;
     if(this.filterDropDownName=="Transmission"){
       this.myCarService.getCarByTransmission(this.isManual).then(()=>this.carList=this.myCarService.carInfo);
     }else{

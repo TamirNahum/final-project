@@ -86,7 +86,6 @@ export class EditUserComponent implements OnInit {
 
  
     this.loading = true;
-    // debugger;
     this.myUserService.editUser(this.userToEdit,this.userToEdit.UserId).subscribe(
       data => {
         this.alertService.success('edited successful', true);

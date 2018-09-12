@@ -31,7 +31,6 @@ export class ReturnCarComponentComponent implements OnInit {
   }
 
   onSubmit(){
-    //debugger;
     this.myOrderService.getOrderByCarNumber(this.carNumber).then(()=>this.orderList=this.myOrderService.orderList);
   }
 
@@ -43,7 +42,7 @@ export class ReturnCarComponentComponent implements OnInit {
       endDate=returnDate;
     }else{
       if(returnDate< startDate){
-      debugger;
+      
       returnDate= startDate;
     }
   }

@@ -72,7 +72,7 @@ export class AddCarTypeComponent implements OnInit {
  
     this.loading = true;
     let callback = (bool: boolean) => { (bool) ? "action success" : "action fail"; }
-    // debugger;
+   
     this.myCarTypeService.addCarType(this.carTypeToEdit).subscribe(
       data => {
         this.alertService.success('CarType added successful', true);

@@ -68,7 +68,7 @@ export class CarService {
     }
 
     editCar(car: Car, carId: number) {
-        debugger;
+        
         return this.myHttpClient.put<boolean>(`${this.link}/${carId}`, JSON.stringify(car),{ headers: {"content-type": "application/json",Authorization:`${this.myUserService.userList.singleUser.UserName} ${this.myUserService.userList.singleUser.Password}`}});
     }
 

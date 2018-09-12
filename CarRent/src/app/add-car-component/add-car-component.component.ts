@@ -90,7 +90,7 @@ export class AddCarComponentComponent implements OnInit {
 
   onUpload(caption:string) {
     if(this.fileToUpload){
-  debugger;
+
   // .subscribe(data => { this.localUser.Image=`UserImages/${caption}.jpg`},()=>{  this.localUser.Image="UserImages/default-user.jpg";
    return this.imageService.postCarFile(caption, this.fileToUpload)
    .subscribe(data => { this.carToEdit.Image=`CarImages/${caption}.jpg`; this.myCarService.addCar(this.carToEdit).subscribe(
@@ -143,7 +143,7 @@ export class AddCarComponentComponent implements OnInit {
     this.carToEdit.AvailableAtBranch=this.carToEdit.Branch.BranchId;
     this.carToEdit.CarType=this.carToEdit.CarTypeModel.CarTypeId;
 
-debugger;
+
     this.loading = true;
     this.myCarService.isExist(this.carToEdit.CarNumber).subscribe(
       ()=>{ 
