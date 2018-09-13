@@ -1,4 +1,7 @@
 to install the DB:
+run the scipt in DB->creating CarRentDB
+
+**OR**
 1.Copy your backup .bak file from the folder "DB" in the following location of your pc : C:\Program Files\Microsoft SQL Server\MSSQL11.SQLEXPRESS\MSSQL\DATA
 2.Connect to a server you want to store your DB
 3.Right-click Database
@@ -9,7 +12,7 @@ to install the DB:
 8.Enter the destination of your DB
 9.Enter the name by which you want to store your DB
 10.Click OK
-
+*****
 
 
 to install the project, need to run first "CarRentProject->CarRentProject.sln"
